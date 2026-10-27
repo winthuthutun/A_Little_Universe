@@ -1,0 +1,595 @@
+/* ================================== A LITTLE UNIVERSE Complete website stylesheet ================================== */
+:root { 
+    --night: #070d24;
+     --deep-blue: #0d1940; 
+     --blue: #233d78; 
+     --light-blue: #a9c9ff;
+      --lavender: #c7b9ff;
+       --white: #f5f7ff; 
+       --muted: #b6c2e4; 
+       --glass: rgba(17, 31, 70, 0.76); 
+       --border: rgba(171, 196, 255, 0.22); 
+       --gold: #f5dfab; 
+    }
+|*{
+     box-sizing: border-box;
+      margin: 0;
+       padding: 0;
+     }
+html { 
+    scroll-behavior: smooth; 
+    scroll-padding-top: 80px;
+ }
+body {
+     min-height: 100vh; 
+     overflow-x: hidden;
+      background: var(--night);
+       color: var(--white); 
+       font-family: "DM Sans", "Noto Sans Myanmar", sans-serif;
+        line-height: 1.9;
+     }
+/* Starry background */
+.stars {
+     position: fixed; 
+     inset: 0;
+      z-index: -3;
+       pointer-events: none;
+        background-image:
+         radial-gradient(2px 2px at 10% 20%, #ffffffb8 50%, transparent 100%), 
+         radial-gradient(1px 1px at 30% 75%, #ffffffa0 50%, transparent 100%),
+          radial-gradient(2px 2px at 70% 15%, #d6e3ff 50%, transparent 100%),
+           radial-gradient(1px 1px at 80% 65%, #ffffffa8 50%, transparent 100%),
+            radial-gradient(2px 2px at 45% 45%, #ffffffb0 50%, transparent 100%), 
+            radial-gradient(1px 1px at 90% 90%, #c3d6ff 50%, transparent 100%);
+             background-size: 280px 280px;
+              animation: twinkle 7s ease-in-out infinite alternate; 
+            }
+.nebula {
+     position: fixed;
+      width: 480px; 
+      height: 480px; 
+      border-radius: 50%;
+       filter: blur(100px);
+        opacity: 0.16; 
+        z-index: -2;
+         pointer-events: none;
+         }
+.nebula-one { 
+    background: #315bc2;
+     top: 10%; 
+     left: -250px;
+     }
+.nebula-two { 
+    background: #7954b8;
+     bottom: 0;
+      right: -260px;
+     }
+@keyframes twinkle { from { opacity: 0.55; } to { opacity: 1; } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+@keyframes glow { 0%, 100% { box-shadow: 0 0 18px #8dafff25; } 50% { box-shadow: 0 0 35px #8dafff50; } }
+@keyframes rotate { to { transform: rotate(360deg); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+/* General elements */
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+.hidden { display: none !important; }
+.muted, .section-subtitle { color: var(--muted); }
+.eyebrow { color: var(--light-blue); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.22em; line-height: 1.8; text-transform: uppercase; }
+.tiny-note { margin-top: 22px; color: #aab9df; font-size: 0.76rem; letter-spacing: 0.04em; }
+/* Password screen */
+.lock-screen { min-height: 100vh; display: grid; place-items: center; padding: 30px 20px; }
+.lock-card { width: min(100%, 480px); padding: 48px 38px; text-align: center; background: rgba(12, 23, 55, 0.82); border: 1px solid var(--border); border-radius: 28px; backdrop-filter: blur(18px); animation: fadeUp 1s ease both, glow 5s infinite; }
+.moon { margin-bottom: 12px; color: var(--gold); font-size: 4.5rem; line-height: 1.3; animation: float 5s ease-in-out infinite; }
+.lock-card h1 { margin: 20px 0; font-size: clamp(2.2rem, 7vw, 3.5rem); font-weight: 500; line-height: 1.25; letter-spacing: -0.04em; }
+.lock-card .muted { font-size: 0.95rem; }
+.password-box { margin-top: 34px; text-align: left; }
+.password-box label { display: block; margin-bottom: 9px; color: var(--muted); font-size: 0.85rem; }
+.password-box input { width: 100%; padding: 14px 16px; color: white; background: #080f2a; border: 1px solid #52679b; border-radius: 12px; outline: none; }
+.password-box input:focus { border-color: var(--light-blue); box-shadow: 0 0 0 3px #9bbaff20; }
+.password-box input::placeholder { color: #7786ae; }
+.primary-button { display: inline-flex; justify-content: center; align-items: center; gap: 8px; padding: 13px 23px; color: #fff; background: linear-gradient(135deg, #354f91, #6858a5); border: 1px solid #9ebaff65; border-radius: 999px; font-weight: 600; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+.primary-button:hover { transform: translateY(-3px); box-shadow: 0 8px 28px #637dff35; }
+.password-box .primary-button { width: 100%; margin-top: 15px; }
+error-message { min-height: 25px; margin-top: 10px; color: #ffb9c7; font-size: 0.83rem; }
+/* Website navigation */
+.website { animation: fadeUp 0.9s ease both; }
+.topbar { position: sticky; top: 0; z-index: 20; display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 15px clamp(20px, 6vw, 80px); background: rgba(7, 13, 36, 0.82); border-bottom: 1px solid #b4c9ff16; backdrop-filter: blur(18px); }
+.brand { font-weight: 700; letter-spacing: 0.02em; }
+.topbar-note { color: var(--muted); font-size: 0.78rem; }
+/* Hero */
+.section { position: relative; padding: 100px 24px; }
+.hero { min-height: 710px; display: grid; place-items: center; overflow: hidden; text-align: center; }
+.hero-content { position: relative; z-index: 2; max-width: 760px; animation: fadeUp 1.2s ease both; }
+.hero-moon { margin: 12px 0; color: var(--gold); font-size: clamp(4rem, 9vw, 7rem); line-height: 1.3; text-shadow: 0 0 50px #e5d4a65a; animation: float 5s ease-in-out infinite; }
+.hero h1 { margin: 18px 0 24px; font-size: clamp(2.5rem, 7vw, 5.5rem); line-height: 1.23; font-weight: 500; letter-spacing: -0.045em; }
+.hero h1 span { color: var(--light-blue); text-shadow: 0 0 32px #9cbaff25; }
+.hero-description { margin-bottom: 30px; color: var(--muted); font-size: clamp(0.9rem, 2vw, 1.05rem); }
+.link-button { margin-top: 4px; }
+.scroll-hint { margin-top: 42px; color: #899bc9; font-size: 0.7rem; letter-spacing: 0.22em; }
+.orbit { position: absolute; width: 460px; height: 460px; border: 1px solid #a3bfff16; border-radius: 50%; pointer-events: none; }
+.orbit-one { width: 550px; height: 550px; animation: rotate 80s linear infinite; }
+.orbit-two { width: 720px; height: 720px; border-style: dashed; animation: rotate 120s linear infinite reverse; }
+.floating-star { position: absolute; color: var(--light-blue); animation: float 4s ease-in-out infinite; }
+.star-a { top: 20%; left: 16%; font-size: 2rem; }
+.star-b { top: 34%; right: 18%; font-size: 2.5rem; animation-delay: 1s; }
+.star-c { bottom: 20%; left: 24%; font-size: 2rem; animation-delay: 2s; }
+.star-d { bottom: 27%; right: 23%; font-size: 1.5rem; animation-delay: 0.5s; }
+/* Section headings */
+.content-section { width: min(100%, 1120px); margin: 0 auto; }
+.section-heading { max-width: 700px; margin: 0 auto 48px; text-align: center; }
+.section-heading h2 { margin: 13px 0; font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 500; line-height: 1.4; letter-spacing: -0.03em; }
+.section-subtitle { font-size: 0.95rem; }
+/* Birthday letter */
+.letter-card { max-width: 790px; margin: 0 auto; padding: clamp(25px, 5vw, 55px); background: linear-gradient( 145deg, rgba(19, 35, 77, 0.91), rgba(12, 22, 53, 0.94) ); border: 1px solid var(--border); border-radius: 22px; box-shadow: 0 24px 80px #00000020; }
+.letter-card h3 { margin: 16px 0 20px; color: #dce7ff; font-size: 1.2rem; font-weight: 600; }
+.letter-card p { margin: 18px 0; color: #d0daf2; font-size: 0.96rem; line-height: 2.15; overflow-wrap: anywhere; }
+.letter-decoration { color: #a4baff; text-align: center; letter-spacing: 0.15em; }
+.scrapbook-note { display: flex; align-items: flex-start; gap: 15px; margin: 25px 0; padding: 20px; background: #a8bfff0c; border: 1px dashed #9cb9ff60; border-radius: 15px; }
+.scrapbook-note p { margin: 0; }
+.note-icon { font-size: 1.6rem; }
+.letter-card .letter-signoff { margin-top: 28px; color: var(--light-blue); text-align: center; }
+/* Basketball */
+.basketball-card { display: grid; grid-template-columns: 0.8fr 1.2fr; align-items: center; gap: 35px; padding: clamp(25px, 5vw, 50px); background: var(--glass); border: 1px solid var(--border); border-radius: 24px; }
+.basketball-art { position: relative; display: grid; place-items: center; min-height: 270px; overflow: hidden; background: radial-gradient(circle, #2d477d 0%, #101d43 65%, #0a122b 100%); border-radius: 20px; }
+.basketball-art::before, .basketball-art::after { position: absolute; content: ""; border: 1px solid #b6ceff35; border-radius: 50%; }
+.basketball-art::before { width: 230px; height: 230px; }
+basketball-art::after { width: 180px; height: 180px; }
+.basketball-ball { position: relative; z-index: 1; font-size: 7rem; filter: drop-shadow(0 12px 25px #00000055); animation: float 4s ease-in-out infinite; }
+.basketball-star { position: absolute; top: 25px; right: 30px; color: var(--gold); font-size: 2rem; }
+.basketball-copy h3 { margin: 10px 0 18px; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 500; line-height: 1.4; }
+.basketball-copy > p:not(.eyebrow):not(.highlight-line) { color: var(--muted); font-size: 0.94rem; line-height: 2.1; }
+.highlight-line { margin-top: 20px; color: var(--light-blue); font-weight: 600; }
+/* Music player */
+.music-card { max-width: 590px; margin: 0 auto; padding: 40px 30px; text-align: center; background: var(--glass); border: 1px solid var(--border); border-radius: 24px; animation: glow 6s ease-in-out infinite; }
+.music-disc { display: grid; place-items: center; width: 95px; height: 95px; margin: 0 auto 22px; color: white; background: linear-gradient(145deg, #344d90, #7358a7); border: 1px solid #d1ddff55; border-radius: 50%; font-size: 2.8rem; box-shadow: 0 0 40px #718dff28; }
+.music-card h3 { margin-bottom: 5px; font-size: 1.55rem; }
+.music-card > .primary-button { margin-top: 25px; }
+.youtube-player { margin-top: 25px; overflow: hidden; border-radius: 14px; background: #080f2a; }
+.youtube-player iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+.music-card .tiny-note { line-height: 1.8; }
+/* Wishes */
+.wish-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.wish-card { padding: 28px 22px; background: var(--glass); border: 1px solid var(--border); border-radius: 20px; text-align: center; transition: transform 0.25s ease, border-color 0.25s ease; }
+.wish-card:hover { transform: translateY(-6px); border-color: #a9c9ff80; }
+.wish-card > span { display: block; margin-bottom: 15px; font-size: 2.3rem; }
+.wish-card h3 { margin-bottom: 10px; font-size: 1.15rem; }
+.wish-card p { color: var(--muted); font-size: 0.85rem; line-height: 1.9; }
+/* Memory wall */
+.memory-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.memory-card { position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: 230px; padding: 30px; overflow: hidden; border: 1px solid var(--border); border-radius: 22px; background: linear-gradient(145deg, #1b2c5b, #0b1430); transition: transform 0.3s ease; }
+.memory-card:hover { transform: translateY(-5px); }
+.memory-card::before { position: absolute; top: -50px; right: -35px; width: 190px; height: 190px; content: ""; border: 1px solid #d1ddff24; border-radius: 50%; }
+.memory-card::after { position: absolute; top: -25px; right: -10px; width: 140px; height: 140px; content: ""; border: 1px dashed #d1ddff30; border-radius: 50%; }
+.memory-one { background: linear-gradient(145deg, #263b72, #11182f); }
+.memory-two { background: linear-gradient(145deg, #42386e, #11172f); }
+.memory-three { background: linear-gradient(145deg, #244b6c, #101a36); }
+.memory-four { background: linear-gradient(145deg, #343d77, #15172f); }
+.memory-emoji { position: relative; z-index: 1; margin-bottom: 20px; font-size: 3rem; }
+.memory-card p { position: relative; z-index: 1; font-size: 1rem; }
+/* Ending */
+.ending-section { min-height: 650px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 110px 25px; text-align: center; background: radial-gradient( ellipse at center, #23386a42 0%, transparent 70% ); }
+.ending-moon { margin-bottom: 20px; color: var(--gold); font-size: 5rem; line-height: 1.2; text-shadow: 0 0 40px #f3dfa950; animation: float 5s ease-in-out infinite; }
+.ending-section h2 { margin: 25px 0; font-size: clamp(1.6rem, 4vw, 3.1rem); font-weight: 500; line-height: 1.6; }
+.universe-quote { max-width: 650px; color: var(--muted); font-size: 1rem; line-height: 2; }
+.ending-stars { margin: 35px 0; color: var(--light-blue); font-size: 1.4rem; }
+.with-love { margin-top: 10px; color: var(--muted); }
+signature { margin-top: 5px; color: var(--light-blue); font-size: 1.1rem; font-style: italic; }
+.final-birthday { margin-top: 28px; color: var(--gold); font-weight: 600; }
+.back-to-top { display: inline-block; margin-top: 35px; padding: 8px 18px; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; font-size: 0.85rem; transition: background 0.2s ease; }
+.back-to-top:hover { background: #a9c9ff18; }
+/* Footer */
+.footer { padding: 25px 15px; color: #8899c3; border-top: 1px solid #b4c9ff16; text-align: center; font-size: 0.76rem; }
+/* Tablet */
+@media (
+     max-width: 850px
+     )
+      { .section { padding: 80px 22px; }
+.hero { min-height: 650px; }
+.wish-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.basketball-card { grid-template-columns: 1fr; }
+.basketball-art { min-height: 220px; }
+.basketball-ball { font-size: 6rem; } }
+/* Mobile */
+@media (max-width: 520px) {
+      body {
+           line-height: 1.8;
+           }
+.topbar { 
+     padding: 12px 16px; 
+        }
+.brand {
+      font-size: 0.86rem; 
+     }
+.topbar-note { 
+     font-size: 0.68rem; 
+}
+.section { 
+     padding: 65px 18px;
+ }
+.hero {
+     height: 610px;
+ }
+.hero-description { 
+     font-size: 0.86rem;
+ }
+.orbit-one {
+      width: 340px; 
+      height: 340px;
+      }
+.orbit-two { 
+     width: 460px;
+      height: 460px;
+ }
+.star-a { 
+     left: 7%;
+ }
+.star-b { 
+     right: 7%; 
+}
+.lock-card {
+      padding: 36px 23px; 
+      border-radius: 22px; 
+     }
+.letter-card { 
+     padding: 23px 19px;
+      border-radius: 18px;
+      }
+.letter-card p { 
+     font-size: 0.9rem; 
+     line-height: 2;
+ }
+.scrapbook-note { 
+     padding: 14px; 
+     gap: 10px;
+ }
+.wish-grid {
+      gap: 12px; 
+     }
+.wish-card { 
+     padding: 22px 13px; 
+}
+.wish-card p {
+      font-size: 0.8rem; 
+     }
+.memory-grid { 
+     grid-template-columns: 1fr; 
+}
+.memory-card { 
+     min-height: 190px; 
+     padding: 25px;
+ }
+.music-card { 
+     padding: 30px 18px;
+ }
+.ending-section h2 { 
+     font-size: 1.55rem;
+ }
+.universe-quote { 
+     font-size: 0.9rem;
+ } }
+/* Accessibility: reduce motion if preferred */
+@media (prefers-reduced-motion: reduce) {
+      *,
+       *::before,
+        *::after {
+          scroll-behavior: auto !important; 
+          animation-duration: 0.01ms !important;
+           animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important; 
+} 
+}
+/* Audio Player ကို ဒီဇိုင်းလှပပြီး ပေါ်လွင်အောင် လုပ်ခြင်း */
+audio {
+  width: 100%;
+  border-radius: 30px;
+  background-color: #2a2238; /* Website နဲ့ လိုက်ဖက်တဲ့ ခရမ်းရောင်ဖျော့ဖျော့ နောက်ခံ */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Audio Controls တွေကို ဖြူစင်ရှင်းလင်းစွာ ပေါ်လာစေရန် */
+audio::-webkit-media-controls-panel {
+  background-color: #2a2238;
+}
+
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display {
+  color: #ffffff; /* စာသားတွေကို အဖြူရောင်နဲ့ ကြည်လင်စွာပြရန် */
+} 
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  animation: shake 0.4s ease-in-out;
+  border-color: #ff6b6b !important;
+}
+/* SPA Page View Mode */
+.hidden-page {
+  display: none !important;
+}
+
+.active-page {
+  display: block !important;
+  animation: fadeInPage 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeInPage {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Wish Section Styling */
+.wish-card {
+  background: rgba(18, 26, 47, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 40px 25px;
+  max-width: 600px;
+  margin: 40px auto;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(123, 156, 255, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.wish-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  animation: pulseStar 2s infinite ease-in-out;
+}
+
+.wish-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 25px;
+  align-items: center;
+}
+
+.wish-input-wrapper input {
+  width: 85%;
+  padding: 14px 18px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 1rem;
+  outline: none;
+  text-align: center;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wish-input-wrapper input:focus {
+  border-color: #8ab4f8;
+  box-shadow: 0 0 12px rgba(138, 180, 248, 0.4);
+}
+
+.wish-result {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+  animation: fadeInWish 0.8s ease-in-out forwards;
+}
+
+.star-glow {
+  font-size: 2.5rem;
+  animation: floatStar 3s ease-in-out infinite;
+}
+
+#wishDisplayText {
+  font-size: 1.15rem;
+  color: #e8f0fe;
+  font-style: italic;
+  margin: 12px 0 6px 0;
+}
+
+.wish-subtext {
+  font-size: 0.85rem;
+  color: #9aa0a6;
+}
+
+@keyframes pulseStar {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); }
+  50% { transform: scale(1.15); filter: drop-shadow(0 0 15px rgba(138,180,248,0.8)); }
+}
+
+@keyframes floatStar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes fadeInWish {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+/* Memory Wall Layout (4 Columns Side-by-Side) */
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 10px;
+}
+
+/* Card Style (အဝိုင်းလိုင်းများ ဖယ်ရှားပြီး မူလ Clean Vibe) */
+.memory-card {
+  background: rgba(18, 26, 47, 0.75);
+  background-image: none !important; /* အဝိုင်းအစင်းလိုင်းများ လုံးဝ ဖျောက်ခြင်း */
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 24px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 340px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.memory-card::before,
+.memory-card::after {
+  display: none !important; /* pseudo-elements အစင်းကြောင်းများ ရှိပါက ဖျောက်ခြင်း */
+}
+
+.memory-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Photo Wrapper */
+.memory-img-wrapper {
+  width: 100%;
+  height: 140px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.memory-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Text Styling */
+.memory-card h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.memory-card p {
+  font-size: 0.85rem;
+  color: #a0aec0;
+  line-height: 1.45;
+  margin-bottom: 6px;
+}
+
+.memory-card p.sub-text {
+  font-size: 0.78rem;
+  color: #718096;
+  font-style: italic;
+}
+/* Custom Aesthetic Music Card */
+.music-card {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  border-radius: 24px;
+  padding: 32px 24px;
+  max-width: 380px;
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Vinyl Disc Wrapper & Animation */
+.vinyl-wrapper {
+  margin-bottom: 20px;
+}
+
+.vinyl-record {
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, #2d3748 30%, #1a202c 70%, #0d1117 100%);
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+  transition: transform 0.5s ease;
+}
+
+/* သီချင်းလာရင် ဓာတ်ပြားလေး လည်ပတ်မည့် Animation */
+.vinyl-record.playing {
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.vinyl-center {
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: white;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Song Info */
+.song-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.song-artist {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  margin-bottom: 22px;
+}
+
+/* Play/Pause Circle Button */
+.play-btn {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 18px rgba(99, 102, 241, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin: 0 auto;
+}
+
+.play-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 24px rgba(168, 85, 247, 0.65);
+}
+
+/* Note Text Below */
+.tiny-note {
+  margin-top: 18px;
+  font-size: 0.82rem;
+  color: #94a3b8;
+  font-style: italic;
+}
